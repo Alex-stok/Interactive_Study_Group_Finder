@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Invites</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<main class="container">
+<ul id="invite-list"></ul>
+
+<script>
+    const API_URL = "https://interactive-study-group-finder.onrender.com";
+    const token = localStorage.getItem("token");
+
+    async function loadInvites() {
+        const response = await fetch(`${API_URL}/my-meeting-invites`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!response.ok) {
+            alert("Could not load meeting invites.");
+            return;
+        }
+
+        const invites = await response.json();
+        const list = document.getElementById("invite-list");
+        list.innerHTML = "";
+
+        invites.forEach(invite => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <strong>${invite.title}</strong> - ${invite.meeting_time}<br/>
+                <em>${invite.description}</em><br/>
+                <button onclick="joinMeeting('${invite.room_name}')">Join</button>
+                <hr/>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    function joinMeeting(roomName) {
+        window.location.href = `meeting.html?room=${encodeURIComponent(roomName)}`;
+    }
+
+    window.onload = loadInvites;
+</script>
