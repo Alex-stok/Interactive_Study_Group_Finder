@@ -8,3 +8,4 @@ jinja2
 jwt
 pydantic
 python-multipart
+psycopg2-binary
