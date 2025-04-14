@@ -7,7 +7,7 @@ import jwt
 # Secret key for JWT
 SECRET_KEY = "MostSecretof_keys!"
 ALGORITHM = "HS256"
-DATABASE_URL = "mysql+mysqlconnector://root:pass4sql@localhost:3306/soft_project"
+DATABASE_URL = "postgresql://study_buddy_db_4d6f_user:XELrggHktqDTi3RatZT19oFwF20LXdJ8@dpg-cvubbpidbo4c739giua0-a/study_buddy_db_4d6f"
 
 security = HTTPBearer()
 
